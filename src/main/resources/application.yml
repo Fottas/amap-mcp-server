@@ -1,0 +1,94 @@
+server:
+  port: 8081
+
+spring:
+  main:
+    web-application-type: reactive
+  application:
+    name: amap-mcp-server
+
+  # Spring AI MCP 服务配置
+  ai:
+    mcp:
+      server:
+        enabled: true
+        protocol: STREAMABLE
+        name: amap-mcp-server
+        version: 1.0.0
+        type: ASYNC
+        instructions: "高德地图MCP服务器，提供地理编码、路线规划、POI搜索等地图服务功能"
+        capabilities:
+          tool: true
+          resource: true
+          prompt: true
+          completion: true
+        streamable:
+          mcp-endpoint: /mcp
+
+  # 缓存配置
+  cache:
+    type: caffeine
+    caffeine:
+      spec: maximumSize=1000,expireAfterWrite=30m
+    cache-names: amap-cache
+# 高德地图API配置
+amap:
+  api:
+    base-url: https://restapi.amap.com
+    key: xxxxxx
+    timeout: 30s
+    retry:
+      max-attempts: 3
+      delay: 1s
+
+# 日志配置
+logging:
+  level:
+    com.amap.mcp: DEBUG
+    org.springframework.ai.mcp: DEBUG
+    reactor.netty.http.client: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+# 监控端点配置
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: always
+  metrics:
+    tags:
+      application: ${spring.application.name}
+
+# 应用自定义配置
+app:
+  # 工具配置
+  tools:
+    enabled: true
+    # 启用的工具列表
+    active-tools:
+      - geocoding
+      - reverse-geocoding
+      - route-planning
+      - poi-search
+      - weather
+      - ip-location
+      - district-query
+      - traffic-status
+
+  # 安全配置
+  security:
+    api-rate-limit: 1000  # 每分钟API调用限制
+    enable-cors: true
+    allowed-origins: "*"
+
+  # 缓存配置
+  cache:
+    enabled: true
+    default-ttl: 1800  # 30分钟
+    geocoding-ttl: 3600  # 1小时
+    route-ttl: 600  # 10分钟
+    poi-ttl: 1800  # 30分钟
