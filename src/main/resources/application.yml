@@ -11,6 +11,8 @@ spring:
   ai:
     mcp:
       server:
+        enabled: true
+        transport-type: STREAMABLE
         name: amap-mcp-server
         version: 1.0.0
         type: ASYNC
@@ -29,7 +31,6 @@ spring:
     caffeine:
       spec: maximumSize=1000,expireAfterWrite=30m
     cache-names: amap-cache
-
 # 高德地图API配置
 amap:
   api:
