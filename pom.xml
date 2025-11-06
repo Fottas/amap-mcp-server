@@ -55,15 +55,14 @@
         <maven.compiler.source>23</maven.compiler.source>
         <maven.compiler.target>23</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <spring-ai.version>1.0.0</spring-ai.version>
+        <spring-ai.version>1.1.0-M3</spring-ai.version>
     </properties>
     
     <dependencies>
         <!-- Spring AI MCP Server WebFlux -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
-            <artifactId>fot-spring-ai-starter-mcp-server-webflux</artifactId>
-            <version>1.1.0</version>
+            <artifactId>spring-ai-starter-mcp-server-webflux</artifactId>
         </dependency>
 
         <!-- Spring Boot Cache -->
