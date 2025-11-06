@@ -1,0 +1,13 @@
+package com.fottas.amapmcpserver;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class AmapMcpServerApplication {
+
+    public static void main(String[] args) {
+        SpringApplication.run(AmapMcpServerApplication.class, args);
+    }
+
+}
